@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {chessMap} from "../modules/chess"
+---
+
+<Layout title="Lightning chess">
+	<main class="flex items-center justify-center w-full h-screen">
+    <a href={`/play/${crypto.randomUUID()}?game=${chessMap}`}>play</a>
+  </main>
+</Layout>
+

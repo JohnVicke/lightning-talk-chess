@@ -1,0 +1,11 @@
+---
+import {type PieceType} from "../modules/chess"
+
+interface Props {
+  piece: PieceType
+}
+
+const {piece} = Astro.props satisfies Props
+---
+
+<div>hello</div>
