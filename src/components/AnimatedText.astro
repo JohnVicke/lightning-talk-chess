@@ -6,7 +6,7 @@ type Element = "h1" | "h2" | "h3" | "p";
 interface Props {
   key?: string;
   element?: Element;
-  className: string;
+  className?: string;
 }
 
 const { className, element: Element = "p" } = Astro.props;
