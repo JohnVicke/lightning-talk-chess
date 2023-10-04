@@ -1,0 +1,15 @@
+---
+import {redirectToAuthCodeFlowUrl} from "../../modules/spotify"
+
+const {url, verifier} = await redirectToAuthCodeFlowUrl()
+
+
+Astro.cookies.set("verifier", verifier, {
+  httpOnly: true,
+  secure: true
+  })
+
+---
+
+<h1>Register</h1>
+<a href={url}>Register with Spotify</a>
