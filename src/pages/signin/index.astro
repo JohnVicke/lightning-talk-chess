@@ -1,14 +1,12 @@
 ---
-import {redirectToAuthCodeFlowUrl} from "../../modules/spotify"
+import { redirectToAuthCodeFlowUrl } from "../../modules/spotify";
 
-const {url, verifier} = await redirectToAuthCodeFlowUrl()
-
+const { url, verifier } = await redirectToAuthCodeFlowUrl();
 
 Astro.cookies.set("verifier", verifier, {
   httpOnly: true,
-  secure: true
-  })
-
+  secure: true,
+});
 ---
 
 <h1>Register</h1>

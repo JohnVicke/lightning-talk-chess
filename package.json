@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx}\" --ignore-path .gitignore"
+    "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,astro}\" --ignore-path .gitignore"
   },
   "dependencies": {
     "@astrojs/mdx": "^1.1.0",

@@ -1,13 +1,12 @@
 ---
-import AnimatedText from '../components/AnimatedText.astro';
-import SlideshowLayout from 'layouts/SlideshowLayout.astro';
+import AnimatedText from "../components/AnimatedText.astro";
+import SlideshowLayout from "layouts/SlideshowLayout.astro";
 ---
 
 <SlideshowLayout title="Lightning chess">
   <h1 slot="header" class="text-[10rem] font-bold">Lightning chess</h1>
   <div slot="content">
-  <AnimatedText element="p">View transitions</AnimatedText>
-  <a href="/slides/1">go to next</a>
+    <AnimatedText element="p">View transitions</AnimatedText>
+    <a href="/slides/1">go to next</a>
   </div>
 </SlideshowLayout>
-

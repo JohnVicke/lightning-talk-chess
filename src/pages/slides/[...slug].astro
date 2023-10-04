@@ -1,36 +1,37 @@
 ---
-import SlideshowLayout from '../../layouts/SlideshowLayout.astro';
-import AnimatedText from '../../components/AnimatedText.astro';
-import { getCollection, getEntry } from 'astro:content';
-
+import SlideshowLayout from "../../layouts/SlideshowLayout.astro";
+import AnimatedText from "../../components/AnimatedText.astro";
+import { getCollection, getEntry } from "astro:content";
 
 export async function getStaticPaths() {
-  const slides = await getCollection('slide');
-  return slides.map(slide => ({
-    params: { slug: slide.slug }, props: { slide },
+  const slides = await getCollection("slide");
+  return slides.map((slide) => ({
+    params: { slug: slide.slug },
+    props: { slide },
   }));
 }
 
-const {slug} = Astro.params;
+const { slug } = Astro.params;
 
-if(!slug) {
-  return Astro.redirect('/404');
+if (!slug) {
+  return Astro.redirect("/404");
 }
 
-const slide = await getEntry('slide', slug);
+const slide = await getEntry("slide", slug);
 
-if(!slide) {
-  return Astro.redirect('/404');
+if (!slide) {
+  return Astro.redirect("/404");
 }
 
-const {render, data: {description, title, next, prev}} = slide
+const {
+  render,
+  data: { description, title, next, prev },
+} = slide;
 
-const {Content, headings, remarkPluginFrontmatter} = await render();
-
+const { Content, headings, remarkPluginFrontmatter } = await render();
 ---
 
 <SlideshowLayout title="Lightning chess" next={next?.slug} prev={prev?.slug}>
   <AnimatedText element="h1" slot="header">{title}</AnimatedText>
-  <Content slot="content"/>
+  <Content slot="content" />
 </SlideshowLayout>
-

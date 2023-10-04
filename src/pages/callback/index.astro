@@ -1,52 +1,52 @@
 ---
-import {fetchProfile, getAccessToken} from "../../modules/spotify"
-import {schema, db } from "../../db"
-import {Session} from "../../redis/session"
-const params = Astro.url.searchParams
+import { fetchProfile, getAccessToken } from "../../modules/spotify";
+import { schema, db } from "../../db";
+import { Session } from "../../redis/session";
+const params = Astro.url.searchParams;
 const code = params.get("code");
 const verifier = Astro.cookies.get("verifier");
 
-if(!code || !verifier?.value) {
-  return Astro.redirect("/signin")
+if (!code || !verifier?.value) {
+  return Astro.redirect("/signin");
 }
 
-const {accessToken, refreshToken, expiresAt} = await getAccessToken(code, verifier.value)
+const { accessToken, refreshToken, expiresAt } = await getAccessToken(
+  code,
+  verifier.value,
+);
 
-if(!accessToken || !refreshToken || !expiresAt) {
-  return Astro.redirect("/signin")
+if (!accessToken || !refreshToken || !expiresAt) {
+  return Astro.redirect("/signin");
 }
 
 try {
-  const profile = await fetchProfile(accessToken)
+  const profile = await fetchProfile(accessToken);
   const profileExists = await db.query.users.findFirst({
-    where: (users, {eq}) => eq(users.id, profile.id)
-  })
+    where: (users, { eq }) => eq(users.id, profile.id),
+  });
 
-  if(!profileExists) {
+  if (!profileExists) {
     const insertRes = await db.insert(schema.users).values({
       id: profile.id,
       displayName: profile.display_name,
       email: profile.email,
-    })
-    console.log({insertRes})
+    });
+    console.log({ insertRes });
   }
 
-  const sessionId = crypto.randomUUID()
+  const sessionId = crypto.randomUUID();
 
   await Session.set(`session-${sessionId}`, {
     profileId: profile.id,
     accessToken,
     refreshToken,
     expiresAt,
-  })
+  });
 
-
-  Astro.cookies.set("session", sessionId)
-
-} catch(e) {
-  console.error(e)
+  Astro.cookies.set("session", sessionId);
+} catch (e) {
+  console.error(e);
 }
-
 ---
 
 <h1>{accessToken}</h1>
