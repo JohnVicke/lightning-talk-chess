@@ -1,0 +1,16 @@
+---
+export const prerender = false
+import {getSession} from "../../modules/auth/get-session"
+
+const authenticated = await getSession(Astro.cookies)
+
+if(!authenticated) {
+    return Astro.redirect("/signin")
+}
+
+const {id} = Astro.params
+---
+
+<div>
+{id}
+</div>
