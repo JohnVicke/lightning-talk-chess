@@ -1,16 +1,43 @@
 ---
+import Layout from "layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { getPlaylistById } from "lib/spotify/playlist-by-id";
+
 export const prerender = false;
-import { getSession } from "modules/auth/get-session";
 
-const authenticated = await getSession(Astro.cookies);
+const {session} = Astro.locals
 
-if (!authenticated) {
+if (!session) {
   return Astro.redirect("/signin");
 }
 
 const { id } = Astro.params;
+
+if (!id) {
+  return Astro.redirect("/404");
+}
+
+const playlist = await getPlaylistById({
+  session,
+  playlistId: id,
+});
+
+const image = playlist.images.at(0);
 ---
 
-<div>
-  {id}
-</div>
+<Layout title={playlist.name}>
+  <div transition:name={`${playlist.name}-transition`}>
+    <h3 class="text-4xl font-bold">{playlist.name}</h3>
+    {
+      image && (
+        <Image
+          transition:name={`${playlist.name}-image`}
+          src={image.url}
+          alt={playlist.name}
+          width={640}
+          height={640}
+        />
+      )
+    }
+  </div>
+</Layout>
