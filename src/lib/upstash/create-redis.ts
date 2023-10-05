@@ -1,7 +1,8 @@
 import { Redis } from "@upstash/redis";
+import { serverEnv } from "env/server";
 
 export const createRedis = () =>
   new Redis({
-    url: import.meta.env.REDIS_URL,
-    token: import.meta.env.REDIS_TOKEN,
+    url: serverEnv.REDIS_URL,
+    token: serverEnv.REDIS_TOKEN,
   });

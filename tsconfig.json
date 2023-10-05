@@ -1,12 +1,15 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "baseUrl": "./src",
     "types": [
       "bun-types"
     ],
-    "jsx": "react-jsx",
+    "skipLibCheck": true,
     "allowJs": true,
-    "jsxImportSource": "preact"
-  }
+    "checkJs": true,
+    "jsxImportSource": "preact",
+    "jsx": "react-jsx"
+  },
+  "exclude": ["node_modules", "dist"]
 }

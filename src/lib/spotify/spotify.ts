@@ -1,3 +1,5 @@
+import { serverEnv } from "env/server";
+
 export function generateCodeVerifier(length: number) {
   let text = "";
   const possible =
@@ -22,7 +24,7 @@ export async function redirectToAuthCodeFlowUrl() {
   const verifier = generateCodeVerifier(128);
   const challenge = await generateCodeChallenge(verifier);
   const params = new URLSearchParams();
-  params.append("client_id", import.meta.env.SPOTIFY_CLIENT_ID);
+  params.append("client_id", serverEnv.SPOTIFY_CLIENT_ID);
   params.append("response_type", "code");
   params.append("redirect_uri", "http://localhost:4321/callback");
   params.append("scope", "user-read-private user-read-email");
@@ -45,7 +47,7 @@ interface AccessTokenResponse {
 
 export async function getAccessToken(code: string, verifier: string) {
   const params = new URLSearchParams();
-  params.append("client_id", import.meta.env.SPOTIFY_CLIENT_ID);
+  params.append("client_id", serverEnv.SPOTIFY_CLIENT_ID);
   params.append("grant_type", "authorization_code");
   params.append("code", code);
   params.append("redirect_uri", "http://localhost:4321/callback");
