@@ -10,6 +10,9 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+  image: {
+    domains: ["scdn.co", "spotifycdn.com"],
+  },
   integrations: [
     tailwind(),
     preact({

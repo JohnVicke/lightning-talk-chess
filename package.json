@@ -9,6 +9,7 @@
     "db:migrate": "bun ./src/db/scripts/migrate.ts",
     "db:push": "drizzle-kit push:sqlite",
     "db:studio": "drizzle-kit studio",
+    "clean": "git clean -xdf dist .astro node_modules",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
