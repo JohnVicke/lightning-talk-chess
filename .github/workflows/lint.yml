@@ -16,7 +16,7 @@ jobs:
           message-failure: |
             Uh oh! ESLint found some issues. Please run `bun lint:fix` and commit the changes
 
-name: TypeScript Check
+name: Lint Check
 
 on:
   pull_request: ~

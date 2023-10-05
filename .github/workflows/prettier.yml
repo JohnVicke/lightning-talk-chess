@@ -16,7 +16,7 @@ jobs:
           message-failure: |
             Uh oh! Prettier found some issues. Please run `bun fmt` to fix it
 
-name: TypeScript Check
+name: Prettier Check
 
 on:
   pull_request: ~
