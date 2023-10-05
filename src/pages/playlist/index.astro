@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import Layout from "layouts/Layout.astro";
+import { getPlaylists } from "lib/spotify/playlists";
+
+export const prerender = false;
+
+const {session} = Astro.locals
+
+if (!session) {
+  return Astro.redirect("/signin");
+}
+
+const { items } = await getPlaylists({
+  session,
+});
+---
+
+<Layout title="playlists">
+  <h1>Playlists</h1>
+  <ul class="flex flex-col gap-4">
+    {
+      items?.map((playlist) => {
+        const image = playlist.images?.at(0);
+        console.log(image);
+        return (
+          <li>
+            <a href={`playlist/${playlist.id}`}>
+              <div
+                class="flex gap-x-2"
+                transition:name={`${playlist.name}-transition`}
+              >
+                {image && (
+                  <Image
+                    transition:name={`${playlist.name}-image`}
+                    src={image.url}
+                    width={100}
+                    height={100}
+                    alt={playlist.name}
+                  />
+                )}
+                <h3>{playlist.name}</h3>
+              </div>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</Layout>
