@@ -1,7 +1,9 @@
 ---
-import { redirectToAuthCodeFlowUrl } from "../../lib/spotify/spotify";
+import { generateSignin } from "lib/spotify/generate-signin";
 
-const { url, verifier } = await redirectToAuthCodeFlowUrl();
+export const prerender = false;
+
+const { url, verifier } = await generateSignin();
 
 Astro.cookies.set("verifier", verifier, {
   httpOnly: true,
