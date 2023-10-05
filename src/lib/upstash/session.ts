@@ -4,7 +4,7 @@ const redis = createRedis();
 
 type SessionKey = `session-${string}`;
 
-interface Session {
+export interface Session {
   accessToken: string;
   expiresAt: number;
   profileId: string;
