@@ -1,0 +1,27 @@
+---
+import { cn } from "modules/cn";
+
+type Element = "h1" | "h2" | "h3" | "p";
+
+interface Props {
+  key?: string;
+  element?: Element;
+  className?: string;
+}
+
+const { className, element: Element = "p" } = Astro.props;
+
+const styles = {
+  h1: "text-[10rem] font-bold",
+  h2: "text-[8rem] font-bold",
+  h3: "text-[6rem] font-bold",
+  p: "text-[2rem]",
+} satisfies Record<Element, string>;
+---
+
+<Element
+  class={cn(styles[Element], className)}
+  transition:name="transition-animated-header"
+>
+  <slot />
+</Element>
