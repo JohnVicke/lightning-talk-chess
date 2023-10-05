@@ -14,7 +14,8 @@
     "lint": "eslint . --max-warnings 0 --report-unused-disable-directives",
     "lint:fix": "bun lint --fix",
     "fmt": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,astro}\" --ignore-path .gitignore",
-    "fmt:check": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,astro}\" --ignore-path .gitignore"
+    "fmt:check": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,astro}\" --ignore-path .gitignore",
+    "ci:check": "bun fmt:check & bun lint & bun test:typecheck"
   },
   "dependencies": {
     "@astrojs/mdx": "^1.1.0",
