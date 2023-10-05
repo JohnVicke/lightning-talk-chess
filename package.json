@@ -13,7 +13,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test:typecheck": "tsc --noEmit --pretty",
+    "test:typecheck": "bun ./node_modules/typescript/bin/tsc --noEmit --pretty",
     "lint": "eslint . --max-warnings 0 --report-unused-disable-directives",
     "lint:fix": "bun lint --fix",
     "fmt": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,astro}\" --ignore-path .gitignore",
@@ -51,7 +51,6 @@
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0",
     "prettier-plugin-tailwindcss": "^0.5.4",
-    "tsc": "^2.0.4",
     "typescript": "^5.2.2"
   },
   "overrides": {

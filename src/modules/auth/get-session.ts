@@ -2,7 +2,7 @@ import type { AstroCookies } from "astro";
 import { Session } from "lib/upstash/session";
 
 export async function getSession(cookies: AstroCookies) {
-  if (!cookies || !cookies.has("session")) {
+  if (!cookies?.has("session")) {
     return false;
   }
 
