@@ -1,0 +1,8 @@
+description: Prepare for CI jobs
+
+name: Prepare
+runs:
+  steps:
+    - uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest

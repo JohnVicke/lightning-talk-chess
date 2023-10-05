@@ -5,10 +5,10 @@ const redis = createRedis();
 type SessionKey = `session-${string}`;
 
 interface Session {
-  profileId: string;
   accessToken: string;
-  refreshToken: string;
   expiresAt: number;
+  profileId: string;
+  refreshToken: string;
 }
 
 export const Session = {

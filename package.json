@@ -1,5 +1,5 @@
 {
-  "name": "lightning-talk-chess",
+  "name": "lightning-talk",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,7 +10,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,astro}\" --ignore-path .gitignore"
+    "test:typecheck": "tsc --noEmit --pretty",
+    "lint": "eslint . --max-warnings 0 --report-unused-disable-directives",
+    "lint:fix": "bun lint --fix",
+    "fmt": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,astro}\" --ignore-path .gitignore",
+    "fmt:check": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,astro}\" --ignore-path .gitignore"
   },
   "dependencies": {
     "@astrojs/mdx": "^1.1.0",
@@ -31,11 +35,19 @@
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
     "bun-types": "^1.0.3",
     "drizzle-kit": "^0.19.13",
+    "eslint": "^8.50.0",
+    "eslint-plugin-astro": "^0.29.1",
+    "eslint-plugin-markdown": "^3.0.1",
+    "eslint-plugin-typescript-sort-keys": "^3.0.0",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0",
-    "prettier-plugin-tailwindcss": "^0.5.4"
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "tsc": "^2.0.4",
+    "typescript": "^5.2.2"
   },
   "overrides": {
     "react": "npm:@preact/compat@latest",

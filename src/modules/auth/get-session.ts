@@ -1,5 +1,5 @@
 import type { AstroCookies } from "astro";
-import { Session } from "redis/session";
+import { Session } from "lib/upstash/session";
 
 export async function getSession(cookies: AstroCookies) {
   if (!cookies || !cookies.has("session")) {

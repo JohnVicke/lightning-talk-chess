@@ -1,5 +1,5 @@
 ---
-import { redirectToAuthCodeFlowUrl } from "../../modules/spotify";
+import { redirectToAuthCodeFlowUrl } from "../../lib/spotify/spotify";
 
 const { url, verifier } = await redirectToAuthCodeFlowUrl();
 

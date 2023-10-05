@@ -2,12 +2,12 @@
 import Layout from "./Layout.astro";
 
 interface Props {
-  title: string;
   next?: string;
   prev?: string;
+  title: string;
 }
 
-const { title, next, prev } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <Layout title={title}>

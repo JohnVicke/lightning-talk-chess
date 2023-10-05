@@ -25,10 +25,10 @@ if (!slide) {
 
 const {
   render,
-  data: { description, title, next, prev },
+  data: {  title, next, prev },
 } = slide;
 
-const { Content, headings, remarkPluginFrontmatter } = await render();
+const { Content } = await render();
 ---
 
 <SlideshowLayout title="Lightning chess" next={next?.slug} prev={prev?.slug}>

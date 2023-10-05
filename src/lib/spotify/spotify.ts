@@ -1,6 +1,6 @@
 export function generateCodeVerifier(length: number) {
   let text = "";
-  let possible =
+  const possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   for (let i = 0; i < length; i++) {
@@ -89,8 +89,8 @@ interface UserProfile {
 }
 
 interface Image {
-  url: string;
   height: number;
+  url: string;
   width: number;
 }
 
@@ -101,8 +101,4 @@ export async function fetchProfile(token: string): Promise<UserProfile> {
   });
 
   return await result.json();
-}
-
-export function populateUI(profile: any) {
-  // TODO: Update UI with profile data
 }

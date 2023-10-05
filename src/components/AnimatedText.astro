@@ -1,12 +1,12 @@
 ---
-import { cn } from "modules/cn";
+import { cn } from "utils/cn";
 
-type Element = "h1" | "h2" | "h3" | "p";
+type TextElement = "h1" | "h2" | "h3" | "p";
 
 interface Props {
-  key?: string;
-  element?: Element;
   className?: string;
+  element?: TextElement;
+  key?: string;
 }
 
 const { className, element: Element = "p" } = Astro.props;
@@ -16,7 +16,7 @@ const styles = {
   h2: "text-[8rem] font-bold",
   h3: "text-[6rem] font-bold",
   p: "text-[2rem]",
-} satisfies Record<Element, string>;
+} satisfies Record<TextElement, string>;
 ---
 
 <Element

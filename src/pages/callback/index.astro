@@ -1,7 +1,8 @@
 ---
-import { fetchProfile, getAccessToken } from "../../modules/spotify";
-import { schema, db } from "../../db";
-import { Session } from "../../redis/session";
+import { fetchProfile, getAccessToken } from "lib/spotify/spotify";
+import { schema, db } from "db";
+import { Session } from "lib/upstash/session";
+
 const params = Astro.url.searchParams;
 const code = params.get("code");
 const verifier = Astro.cookies.get("verifier");
@@ -45,7 +46,7 @@ try {
 
   Astro.cookies.set("session", sessionId, {
     httpOnly: true,
-    secure: true
+    secure: true,
   });
 } catch (e) {
   console.error(e);

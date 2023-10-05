@@ -1,0 +1,27 @@
+jobs:
+  typescript:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout actions
+        uses: actions/checkout@v3
+      - name: Prepare actions
+        uses: ./.github/actions/prepare
+      - name: Sync Astro
+        run: bun astro sync
+      - name: Typecheck
+        run: bun test:typecheck
+      - uses: mshick/add-pr-comment@v2
+        if: failure()
+        with:
+          message-failure: |
+            Uh oh! TypeScript found some issues. Please confirm it's fixed with `bun test:typecheck`.
+
+name: TypeScript Check
+
+on:
+  pull_request: ~
+  merge_group: ~
+
+  push:
+    branches:
+      - main
