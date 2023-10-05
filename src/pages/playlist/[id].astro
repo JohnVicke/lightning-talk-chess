@@ -5,7 +5,7 @@ import { getPlaylistById } from "lib/spotify/playlist-by-id";
 
 export const prerender = false;
 
-const {session} = Astro.locals
+const { session } = Astro.locals;
 
 if (!session) {
   return Astro.redirect("/signin");
