@@ -18,4 +18,7 @@ export const Session = {
   set: async (key: SessionKey, value: Session) => {
     return redis.set(key, value);
   },
+  delete: async (key: SessionKey) => {
+    return redis.del(key);
+  },
 };

@@ -1,6 +1,5 @@
 import { serverEnv } from "env/server";
-
-const SCOPE = "user-read-private user-read-email playlist-read-private";
+import { SCOPE } from "./constants";
 
 function generateCodeVerifier(length: number) {
   let text = "";

@@ -73,5 +73,6 @@ export async function getPlaylists(options: GetPlaylistsOptions) {
       headers: { Authorization: `Bearer ${options.session.accessToken}` },
     },
   );
-  return res.json() as Promise<PlaylistResponse>;
+
+  return res?.json() as Promise<PlaylistResponse>;
 }

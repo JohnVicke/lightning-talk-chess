@@ -13,6 +13,11 @@ export default defineConfig({
   image: {
     domains: ["scdn.co", "spotifycdn.com"],
   },
+  vite: {
+    build: {
+      sourcemap: true,
+    },
+  },
   integrations: [
     tailwind(),
     preact({
