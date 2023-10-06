@@ -4,7 +4,6 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:astro/recommended",
-    "plugin:typescript-sort-keys/recommended",
   ],
   overrides: [
     {

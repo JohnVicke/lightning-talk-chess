@@ -5,12 +5,12 @@ const base = "https://api.spotify.com/v1/users";
 
 export interface PlaylistResponse {
   href: string;
+  items: Playlist[];
   limit: number;
   next: string;
   offset: number;
   previous: string;
   total: number;
-  items: Playlist[];
 }
 
 export interface Playlist {
@@ -34,19 +34,19 @@ export interface ExternalUrls {
 }
 
 export interface Image {
-  url: string;
   height: number;
+  url: string;
   width: number;
 }
 
 export interface Owner {
+  display_name: string;
   external_urls: ExternalUrls;
   followers: Tracks;
   href: string;
   id: string;
   type: string;
   uri: string;
-  display_name: string;
 }
 
 export interface Tracks {

@@ -28,30 +28,30 @@ export interface Followers {
 }
 
 export interface Image {
-  url: string;
   height: number;
+  url: string;
   width: number;
 }
 
 export interface Owner {
+  display_name?: string;
   external_urls: ExternalUrls;
   followers?: Followers;
   href: string;
   id: string;
+  name?: string;
   type: string;
   uri: string;
-  display_name?: string;
-  name?: string;
 }
 
 export interface Tracks {
   href: string;
+  items: Item[];
   limit: number;
   next: string;
   offset: number;
   previous: string;
   total: number;
-  items: Item[];
 }
 
 export interface Item {
@@ -72,21 +72,21 @@ export interface Track {
   external_urls: ExternalUrls;
   href: string;
   id: string;
+  is_local: boolean;
   is_playable: boolean;
   linked_from: LinkedFrom;
-  restrictions: Restrictions;
   name: string;
   popularity: number;
   preview_url: string;
+  restrictions: Restrictions;
   track_number: number;
   type: string;
   uri: string;
-  is_local: boolean;
 }
 
 export interface Album {
   album_type: string;
-  total_tracks: number;
+  artists: Owner[];
   available_markets: string[];
   external_urls: ExternalUrls;
   href: string;
@@ -96,9 +96,9 @@ export interface Album {
   release_date: string;
   release_date_precision: string;
   restrictions: Restrictions;
+  total_tracks: number;
   type: string;
   uri: string;
-  artists: Owner[];
 }
 
 export interface Restrictions {
@@ -119,16 +119,16 @@ export interface Artist {
 }
 
 export interface ExternalIDS {
-  isrc: string;
   ean: string;
+  isrc: string;
   upc: string;
 }
 
 export interface LinkedFrom {}
 
 interface GetPlaylistByIdOptions {
-  session: Session;
   playlistId: string;
+  session: Session;
 }
 
 export async function getPlaylistById(options: GetPlaylistByIdOptions) {

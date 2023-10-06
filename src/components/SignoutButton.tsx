@@ -1,6 +1,10 @@
+import type { JSX } from "preact/jsx-runtime";
+
 export const prerender = false;
 export default function SignOutButton() {
-  const handleSubmit = async (e: SubmitEvent) => {
+  const handleSubmit = async (
+    e: JSX.TargetedEvent<HTMLFormElement, Event<EventTarget>>,
+  ) => {
     console.log("sign out");
     e.preventDefault();
     const response = await fetch("/api/signout", {

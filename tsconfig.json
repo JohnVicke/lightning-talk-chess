@@ -10,6 +10,7 @@
     "checkJs": true,
     "jsxImportSource": "preact",
     "jsx": "react-jsx"
+
   },
   "exclude": ["node_modules", "dist"]
 }
