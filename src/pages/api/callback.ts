@@ -1,9 +1,8 @@
 import type { APIContext } from "astro";
-import { HTTP_ONLY_AUTH_COOKIE_NAME } from "config/constants";
-import { db, schema } from "db";
-import { fetchProfile } from "lib/spotify/fetch-profile";
+import { db, eq, schema } from "db";
 import { codeExchange } from "lib/spotify/code-exchange";
-import { Session } from "lib/upstash/session";
+import { fetchProfile } from "lib/spotify/fetch-profile";
+import { setSession } from "modules/auth/set-session";
 
 function getSearchParams(url: string) {
   const queryString = url.split("?")?.at(1);
@@ -28,7 +27,7 @@ export async function GET({ request, redirect, cookies }: APIContext) {
     const profile = await fetchProfile(tokenResponse.accessToken);
 
     const userExists = await db.query.users.findFirst({
-      where: (users, { eq }) => eq(users.id, profile.id),
+      where: (user) => eq(user.id, profile.id),
     });
 
     if (!userExists) {
@@ -41,22 +40,16 @@ export async function GET({ request, redirect, cookies }: APIContext) {
 
     const sessionId = crypto.randomUUID();
 
-    await Session.set(`session-${sessionId}`, {
+    await setSession({
       profileId: profile.id,
-      ...tokenResponse,
-    });
-
-    cookies.set(HTTP_ONLY_AUTH_COOKIE_NAME, sessionId, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-      maxAge: 365 * 24 * 60 * 60, // 1 year
-      path: "/",
-      domain: "localhost",
+      tokenResponse,
+      sessionId,
+      cookies,
     });
 
     return redirect("/");
   } catch (e) {
+    console.error(e);
     return redirect("/callback?error=server_error");
   }
 }

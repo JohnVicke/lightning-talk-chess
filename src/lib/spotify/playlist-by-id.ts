@@ -133,7 +133,7 @@ interface GetPlaylistByIdOptions {
 
 export async function getPlaylistById(options: GetPlaylistByIdOptions) {
   const res = await fetch(
-    `${SPOTIFY_BASE_URL}/${options.session.profileId}/playlists/${options.playlistId}`,
+    `${SPOTIFY_BASE_URL}/users/${options.session.profileId}/playlists/${options.playlistId}`,
     {
       method: "GET",
       headers: { Authorization: `Bearer ${options.session.accessToken}` },

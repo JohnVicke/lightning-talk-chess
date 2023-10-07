@@ -17,29 +17,35 @@ const { items } = await getPlaylists({
 ---
 
 <Layout title="playlists">
-  <h1>Playlists</h1>
-  <ul class="flex flex-col gap-4">
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {
       items?.map((playlist) => {
         const image = playlist.images?.at(0);
-        console.log(image);
         return (
           <li>
             <a href={`playlist/${playlist.id}`}>
-              <div
-                class="flex gap-x-2"
-                transition:name={`${playlist.name}-transition`}
-              >
+              <div class="grid grid-cols-[100px_1fr] gap-2">
                 {image && (
                   <Image
                     transition:name={`${playlist.name}-image`}
+                    class="rounded-md"
                     src={image.url}
                     width={100}
                     height={100}
                     alt={playlist.name}
                   />
                 )}
-                <h3>{playlist.name}</h3>
+                <div
+                  class="flex flex-col gap-2 truncate"
+                  transition:name={`${playlist.name}-name`}
+                >
+                  <h3 class="font-semibold text-xl truncate">
+                    {playlist.name}
+                  </h3>
+                  <p class="font-normal text-md truncate">
+                    {playlist.owner.display_name}
+                  </p>
+                </div>
               </div>
             </a>
           </li>

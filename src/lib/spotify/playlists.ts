@@ -1,7 +1,6 @@
 import type { Session } from "lib/upstash/session";
-import { createSearchParams } from "utils/createSearchParams";
-
-const base = "https://api.spotify.com/v1/users";
+import { createSearchParams } from "utils/create-search-params";
+import { SPOTIFY_BASE_URL } from "./constants";
 
 export interface PlaylistResponse {
   href: string;
@@ -67,7 +66,9 @@ export async function getPlaylists(options: GetPlaylistsOptions) {
   });
 
   const res = await fetch(
-    `${base}/${options.session.profileId}/playlists?${params.toString()}`,
+    `${SPOTIFY_BASE_URL}/users/${
+      options.session.profileId
+    }/playlists?${params.toString()}`,
     {
       method: "GET",
       headers: { Authorization: `Bearer ${options.session.accessToken}` },

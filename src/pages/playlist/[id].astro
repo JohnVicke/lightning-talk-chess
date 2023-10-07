@@ -22,22 +22,82 @@ const playlist = await getPlaylistById({
   playlistId: id,
 });
 
-const image = playlist.images.at(0);
+if (!playlist) {
+  return Astro.redirect("/404");
+}
+
+const image = playlist.images?.at(0);
 ---
 
 <Layout title={playlist.name}>
-  <div transition:name={`${playlist.name}-transition`}>
-    <h3 class="text-4xl font-bold">{playlist.name}</h3>
-    {
-      image && (
-        <Image
-          transition:name={`${playlist.name}-image`}
-          src={image.url}
-          alt={playlist.name}
-          width={640}
-          height={640}
-        />
-      )
-    }
+  <div class="flex flex-col gap-8 relative max-w-screen-lg mx-auto">
+    <a href="/playlist" class="text-blue-500 hover:underline"
+      >Back to playlists</a
+    >
+    <div class="mx-auto flex flex-col gap-8 items-center">
+      {
+        image && (
+          <Image
+            class="rounded-xl"
+            transition:name={`${playlist.name}-image`}
+            src={image.url}
+            alt={playlist.name}
+            width={300}
+            height={300}
+          />
+        )
+      }
+      <div
+        class="flex flex-col gap-2 items-center"
+        transition:name={`${playlist.name}-name`}
+      >
+        <h3 class="text-4xl font-bold">{playlist.name}</h3>
+        <p>
+          {
+            playlist.owner?.display_name ??
+              playlist.owner?.name ??
+              playlist.owner?.id
+          }
+        </p>
+      </div>
+    </div>
+    <div class="flex flex-col gap-y-4 w-full">
+      {
+        playlist.tracks.items.map(({ track }, index) => {
+          const image = track?.album?.images.at(0)?.url;
+          if (!image) return null;
+          return (
+            <div class="flex gap-4 max-w-full overflow-hidden">
+              {image && (
+                <Image
+                  class="rounded-lg"
+                  src={image}
+                  width={64}
+                  height={64}
+                  alt={track.name}
+                />
+              )}
+              <div class="flex flex-col gap-2">
+                <h4 class="overflow-hidden whitespace-nowrap">{track.name}</h4>
+                <p class="truncate">
+                  {track.artists.map((artist) => artist.name).join(", ")}
+                </p>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
   </div>
+  {
+    image && (
+      <Image
+        class="absolute -z-10 inset-0 mix-blend-overlay opacity-20 w-full h-full object-cover blur-md rounded-xl bg-gradient-to-b"
+        src={image.url}
+        alt={playlist.name}
+        width={1000}
+        height={2000}
+      />
+    )
+  }
 </Layout>

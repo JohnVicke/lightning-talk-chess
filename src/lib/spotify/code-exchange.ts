@@ -1,12 +1,6 @@
 import { serverEnv } from "env/server";
-
-interface AccessTokenResponse {
-  access_token: string;
-  expires_in: number;
-  refresh_token: string;
-  scope: string;
-  token_type: string;
-}
+import type { TokenResponse } from "./types";
+import { responseToToken } from "./utils";
 
 export async function codeExchange(code: string, verifier: string) {
   const params = new URLSearchParams();
@@ -22,15 +16,7 @@ export async function codeExchange(code: string, verifier: string) {
     body: params,
   });
 
-  const {
-    access_token: accessToken,
-    refresh_token: refreshToken,
-    expires_in: expiresIn,
-    token_type: tokenType,
-    scope,
-  } = (await result.json()) as AccessTokenResponse;
+  const tokenResponse = (await result.json()) as TokenResponse;
 
-  const expiresAt = Date.now() + expiresIn;
-
-  return { accessToken, refreshToken, expiresAt, tokenType, scope };
+  return responseToToken(tokenResponse);
 }

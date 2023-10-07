@@ -1,3 +1,5 @@
+import { SPOTIFY_BASE_URL } from "./constants";
+
 interface UserProfile {
   country: string;
   display_name: string;
@@ -23,7 +25,7 @@ interface Image {
 }
 
 export async function fetchProfile(token: string): Promise<UserProfile> {
-  const result = await fetch("https://api.spotify.com/v1/me", {
+  const result = await fetch(`${SPOTIFY_BASE_URL}/me`, {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   });
